@@ -1,6 +1,9 @@
 # deep-into-certificate-authority
 
 ## https 工作原理
+
+![dotuml](imgs/dotuml.png)
+
 ## openssl certificate authority
 ## golang https 和客户端认证
 ## kubernetes x509 authentication

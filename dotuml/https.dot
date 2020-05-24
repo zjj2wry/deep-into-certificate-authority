@@ -1,0 +1,34 @@
+SequenceDiagram [frame=true framecolor=steelblue label="https workflow"] {
+  lifeline "Client" as c autoactivate
+  lifeline "Server" as s autoactivate
+  lifeline "Certificate Authority" as ca autoactivate
+	fragment strict "certificate signing" {
+    autonumber 1 1
+    s --> s "generated private server key"
+    note right of ca "ca holds private ca key and public ca cert"
+  	s --> ca "certificate signing request"
+    note left "use the private server key to create a certificate signing request (CSR)"
+		ca --> s "return signed public server cert"
+    note right "use private ca key signing cert"
+    note left of s "currently server have private key and public cert"
+    autonumber stop
+    s -a-> ca "(async)every body can get public ca cert"
+    autonumber resume
+    s --> s "use public ca cert verify server cert"
+    autonumber stop
+    c -a-> ca "(async)every body can get public ca cert"
+ 	}
+  autonumber 1 1
+  note left of c "currently client have public ca cert"
+  c --> s "request https://server-domain.com"
+  s --> c "response public server cert"
+  note left of c "use public ca cert verify public server cert"
+  note left of c "if unvalid, will display https warning"
+  c --> c "generated random symmetric key"
+  c --> s "transfer encrypted symmetric key"
+  note left "use public server cert to encrypt random key"
+	s --> s "use private server key to decrypt encrypted key"
+  note right of s "currently server have symmetric key"
+  s --> c "use symmetric key to encryt content"
+  c --> c "use symmetric key to descrypt content"
+} 
