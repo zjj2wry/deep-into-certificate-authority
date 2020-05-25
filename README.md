@@ -1,12 +1,13 @@
 # deep-into-certificate-authority
 
-## https 工作原理
-
-![dotuml](imgs/dotuml.png)
-
+## https 
+![https](imgs/https.svg)
+## ssl client authentication
+![client-auth](imgs/client-auth.svg)
 ## openssl certificate authority
-## golang https 和客户端认证
+## golang https
+## golang two-way tls
 ## kubernetes x509 authentication
-## kubernetes bootstrap token(kubeadm token)
+## kubernetes bootstrap token
 ## cert-manager with let's encrypt
 ## kubernetes tls ingress
